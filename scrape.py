@@ -1,13 +1,9 @@
 from bs4 import BeautifulSoup
 from enum import Enum
-from functools import partial
 import os
-import re
 import requests
 import json
-import urllib
 import urlparse
-from HTMLParser import HTMLParser
 
 
 class FieldType(Enum):
@@ -69,7 +65,7 @@ def get_data(tags, field_params):
 
 def postprocess(infile_name, outfile_name):
   """Once main() has been run, apply additional transformations."""
-  data = json.loads(open(infile_name, 'r').readline())#['data']
+  data = json.loads(open(infile_name, 'r').readline())
   
   def tox_by_animal(string):
     """Given the ASPCA toxicity description, check which animals apply."""
