@@ -42,7 +42,7 @@ phonecatApp.directive('checkCell', function() {
       '  <i ng-if="!toxic" ' +
       '     class="fa fa-check"></i>' +
       '  <a ng-if="toxic" ' +
-      '     href="#" tooltip-placement="right" ' +
+      '     tooltip-placement="right" ' +
       '     tooltip="{{ row.clinical_signs }}">' +
       '    <i class="fa fa-times"></i>' +
       '  </a>' +

@@ -25,6 +25,19 @@ input#search {
   text-align: center;
 }
 
+a {
+  outline: none;
+}
+
+.tooltip {
+  font-family: Lato;
+  font-size: 13px;
+  line-height: 1.35em;
+}
+.tooltip-inner {
+  padding: 0.5em 0.7em;
+}
+
 #search-wrapper {
   padding: 0.5em;
   padding-bottom: 1.5em;
