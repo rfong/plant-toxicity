@@ -43,9 +43,9 @@ h1 {
 }
 
 .legend span {
-  margin: 0 1.5em;
+  margin: 0 1em;
 }
-.legend fa {
+.legend .fa {
   margin: 0 0.2em;
 }
 
