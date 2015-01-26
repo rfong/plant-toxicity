@@ -1,0 +1,33 @@
+<script type="text/javascript" src="underscore.min.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="data2.json"></script> 
+
+<script type="text/javascript">
+  $(document).ready(function(e) {
+    // Use mustache style templating {{ variable }}
+    _.templateSettings = {
+      interpolate: /\{\{(.+?)\}\}/g
+    };
+
+    var data = json_data.data;
+    console.log("length:", data.length);
+    populatePlantData(data);
+  });
+
+  function generateRowTemplate(field_names) {
+    return '<tr>' +
+      _.map(field_names, function(field_name) {
+        return '<td class="' + field_name + '">{{ ' + field_name + ' }}</td>';
+      }).join('') +
+      '</tr>';
+  }
+
+  function populatePlantData(rows) {
+    console.log(generateRowTemplate(_.keys(rows[0])));
+  }
+</script>
+
+<div class="content">
+  <table class="plant-data">
+  </table>
+</div>
