@@ -69,7 +69,7 @@ def get_data(tags, field_params):
 
 def postprocess(infile_name, outfile_name):
   """Once main() has been run, apply additional transformations."""
-  data = json.loads(open(infile_name, 'r').readline())['data']
+  data = json.loads(open(infile_name, 'r').readline())#['data']
   
   def tox_by_animal(string):
     """Given the ASPCA toxicity description, check which animals apply."""
@@ -96,6 +96,13 @@ def postprocess(infile_name, outfile_name):
       row['toxicity'] or '',
       row['non-toxicity'] or ''
     ))
+
+  # All hyphens in keys must go to underscores.
+  for row in data:
+    for key, val in row.iteritems():
+      if '-' in key:
+        row[key.replace('-', '_')] = val
+        del row[key]
 
   # Write back out
   with open(outfile_name, 'w') as outfile:
@@ -164,7 +171,7 @@ def main():
 
   # Dump everything because who cares about memory
   print "Dumping all data to JSON..."
-  with open('data.json', 'w') as outfile:
+  with open('raw_data.json', 'w') as outfile:
     json.dump({'data': plant_data}, outfile)
 
   print "Done."

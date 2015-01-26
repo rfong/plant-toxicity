@@ -1,33 +1,80 @@
-<script type="text/javascript" src="underscore.min.js"></script>
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="data2.json"></script> 
+<html ng-app="plantToxApp">
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<script type="text/javascript">
-  $(document).ready(function(e) {
-    // Use mustache style templating {{ variable }}
-    _.templateSettings = {
-      interpolate: /\{\{(.+?)\}\}/g
-    };
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
-    var data = json_data.data;
-    console.log("length:", data.length);
-    populatePlantData(data);
-  });
+    <link rel="stylesheet" href="css/style.css">
 
-  function generateRowTemplate(field_names) {
-    return '<tr>' +
-      _.map(field_names, function(field_name) {
-        return '<td class="' + field_name + '">{{ ' + field_name + ' }}</td>';
-      }).join('') +
-      '</tr>';
-  }
+    <script type="text/javascript" src="js/underscore.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
 
-  function populatePlantData(rows) {
-    console.log(generateRowTemplate(_.keys(rows[0])));
-  }
-</script>
+    <!-- Hackily include local json file -->
+    <script type="text/javascript" src="data/data.json"></script> 
 
-<div class="content">
-  <table class="plant-data">
-  </table>
-</div>
+    <script type="text/javascript" src="js/main.js"></script> 
+
+  </head>
+  <body ng-controller="PlantToxCtrl">
+
+    <div class="content">
+      <div class="blurb">
+        <h1>Is it safe for my pet?</h1>
+        <p>
+          Data collected from the <a href="https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants">ASPCA plant toxicity list</a>.<br />
+          Made by <a href="http://github.com/rfong">rfong</a>.
+        </p>
+      </div>
+
+      <div id="search-wrapper">
+        <input id="search"
+               class="power"
+               type="text"
+               placeholder="Search"
+               ng-model="query"
+               ng-change="applySearch(query)" />
+      </div>
+
+      <div class="blurb"
+           ng-show="no_results">
+        No matching results.
+      </div>
+
+      <table class="plant-data"
+             ng-hide="no_results">
+        <tr class="header">
+          <td class="name">Name</td>
+          <td class="toxicity-cats">Cats</td>
+          <td class="toxicity-dogs">Dogs</td>
+          <td class="toxicity-horses">Horses</td>
+          <td class="scientific-name">Scientific name</td>
+          <td class="other-names">Other names</td>
+        </tr>
+        <tr ng-repeat="row in rows"
+            ng-show="row.show">
+          <td class="name">
+            {{ row.name }}
+          </td>
+          <td check-cell
+              class="toxicity-cats"
+              toxic="{{ row.toxicity_cats }}"></td>
+          <td check-cell
+              class="toxicity-dogs"
+              toxic="{{ row.toxicity_dogs }}"></td>
+          <td check-cell
+              class="toxicity-horses"
+              toxic="{{ row.toxicity_horses }}"></td>
+          <td class="scientific-name">
+            <i>{{ row.scientific_name }}</i>
+          </td>
+          <td class="other-names">
+            {{ row.additional_common_names }}
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>
