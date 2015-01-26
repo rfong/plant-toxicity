@@ -1,4 +1,4 @@
-var phonecatApp = angular.module('plantToxApp', []);
+var phonecatApp = angular.module('plantToxApp', ['ui.bootstrap']);
 
 phonecatApp.controller('PlantToxCtrl', function ($scope) {
   // Initialize data.
@@ -41,8 +41,11 @@ phonecatApp.directive('checkCell', function() {
       '<td>' +
       '  <i ng-if="!toxic" ' +
       '     class="fa fa-check"></i>' +
-      '  <i ng-if="toxic" ' +
-      '     class="fa fa-times"></i>' +
+      '  <a ng-if="toxic" ' +
+      '     href="#" tooltip-placement="right" ' +
+      '     tooltip="{{ row.clinical_signs }}">' +
+      '    <i class="fa fa-times"></i>' +
+      '  </a>' +
       '</td>';
     },
     scope: true,  // inherited scope
