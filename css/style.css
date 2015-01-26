@@ -42,6 +42,13 @@ h1 {
   text-align: center;
 }
 
+.legend span {
+  margin: 0 1.5em;
+}
+.legend fa {
+  margin: 0 0.2em;
+}
+
 .fa-check { color: #74c174; }
 .fa-times { color: #d35b4e; }
 
