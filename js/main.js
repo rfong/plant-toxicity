@@ -36,21 +36,29 @@ phonecatApp.directive('checkCell', function() {
   return {
     restrict: 'A',
     replace: true,
-    template: function(element, attributes) {
+    template: function(element, attrs) {
       return '' +
       '<td>' +
       '  <i ng-if="!toxic" ' +
+      '     role="img text" ' +
+      '     alt="Safe for {{ animal }}" ' +
+      '     aria-label="Safe for {{ animal }}" ' +
       '     class="fa fa-check"></i>' +
       '  <a ng-if="toxic" ' +
       '     tooltip-placement="right" ' +
       '     tooltip="{{ row.clinical_signs }}">' +
-      '    <i class="fa fa-times"></i>' +
+      '    <i ' +
+      '     role="img text" ' +
+      '     alt="Not safe for {{ animal }}: {{ row.clinical_signs }}" ' +
+      '     aria-label="Not safe for {{ animal }}: {{ row.clinical_signs }}" ' +
+      '     class="fa fa-times"></i>' +
       '  </a>' +
       '</td>';
     },
     scope: true,  // inherited scope
-    link: function($scope, element, attributes) {
-      $scope.toxic = attributes.toxic === 'true';
+    link: function($scope, element, attrs) {
+      $scope.toxic = (attrs.toxic === 'true');
+      $scope.animal = attrs.animal;
     },
   };
 });

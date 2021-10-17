@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <html ng-app="plantToxApp">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta property="og:title" content="Plant toxicity to pets" />
     <meta property="og:description" content="Quickly search houseplants to see which ones are toxic to your pets." />
     <meta property="og:image" content="https://rfong.github.io/plant-toxicity/images/screenshot.png" />
@@ -73,13 +76,16 @@
           </td>
           <td check-cell
               class="toxicity-cats"
-              toxic="{{ row.toxicity_cats }}"></td>
+              data-animal="cats"
+              data-toxic="{{ row.toxicity_cats }}"></td>
           <td check-cell
               class="toxicity-dogs"
-              toxic="{{ row.toxicity_dogs }}"></td>
+              data-animal="dogs"
+              data-toxic="{{ row.toxicity_dogs }}"></td>
           <td check-cell
               class="toxicity-horses"
-              toxic="{{ row.toxicity_horses }}"></td>
+              data-animal="horses"
+              data-toxic="{{ row.toxicity_horses }}"></td>
           <td class="scientific-name">
             <i>{{ row.scientific_name }}</i>
           </td>
