@@ -57,6 +57,11 @@ h1 {
   text-align: center;
 }
 
+.footnote {
+  font-size: 10px;
+  font-style: italic;
+}
+
 .legend span {
   margin: 0 1em;
 }
